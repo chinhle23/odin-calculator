@@ -17,6 +17,11 @@ let operator = '';
 let solution = '';
 
 const operate = (a, b, op) => {
+  if (b === 0 && op === '/') {
+    secondNum = '';
+    operator = '';
+    return `Even 5th Graders know not to divide by zero. Start over!`;
+  }
   switch (op) {
     case '+':
       return add(a, b);
@@ -53,25 +58,37 @@ operators.forEach(item => {
   item.addEventListener('click', () => {
     if (firstNum !== '' && secondNum !== '' && operator !== '') {
       solution = operate(+firstNum, +secondNum, operator);
-      firstNum = solution;
+      if (typeof solution === 'number') {
+        firstNum = solution;
+        display.textContent = `${firstNum} ${operator}`;
+      } else {
+        display.textContent = solution;
+        firstNum = '';
+      }
       secondNum = '';
       operator = item.value;
       solution = '';
     } else if (firstNum !== '') {
       operator = item.value;
+      display.textContent = `${firstNum} ${operator}`;
     } else {
       firstNum = '0';
       operator = item.value;
+      display.textContent = `${firstNum} ${operator}`;
     }
-    display.textContent = `${firstNum} ${operator}`;
   });
 });
 
 equalsButton.addEventListener('click', () => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
     solution = operate(+firstNum, +secondNum, operator);
-    display.textContent = `${firstNum} ${operator} ${secondNum} = ${solution}`;
-    firstNum = solution;
+    if (typeof solution === 'number') {
+      display.textContent = `${firstNum} ${operator} ${secondNum} = ${solution}`;
+      firstNum = solution;
+    } else {
+      display.textContent = solution;
+      firstNum = '';
+    }
     secondNum = '';
     operator = '';
     solution = '';
