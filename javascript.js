@@ -3,6 +3,14 @@ const subtract = (a, b) => +a - +b;
 const multiply = (a, b) => +a * +b;
 const divide = (a, b) => +a / +b;
 
+const clear = () => {
+  firstNum = '';
+  secondNum = '';
+  operator = '';
+  solution = '';
+  display.textContent = '';
+}
+
 let firstNum = '';
 let secondNum = '';
 let operator = '';
@@ -22,8 +30,10 @@ const operate = (a, b, op) => {
 }
 
 let display = document.querySelector('#display');
-
+let clearButton = document.querySelector('#clear');
 let numbers = document.querySelectorAll('.number');
+
+clearButton.addEventListener('click', () => clear());
 
 numbers.forEach(number => {
   number.addEventListener('click', () => {
@@ -50,6 +60,7 @@ operators.forEach(item => {
       operator = item.value;
     } else {
       firstNum = '0';
+      operator = item.value;
     }
     display.textContent = `${firstNum} ${operator}`;
   });
