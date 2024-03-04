@@ -60,14 +60,13 @@ operators.forEach(item => {
       solution = operate(+firstNum, +secondNum, operator);
       if (typeof solution === 'number') {
         firstNum = solution;
+        operator = item.value;
         display.textContent = `${firstNum} ${operator}`;
       } else {
         display.textContent = solution;
         firstNum = '';
       }
       secondNum = '';
-      operator = item.value;
-      solution = '';
     } else if (firstNum !== '') {
       operator = item.value;
       display.textContent = `${firstNum} ${operator}`;
@@ -91,7 +90,6 @@ equalsButton.addEventListener('click', () => {
     }
     secondNum = '';
     operator = '';
-    solution = '';
   } else {
     display.textContent = `${firstNum} ${operator}`;
   }
