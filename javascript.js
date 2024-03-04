@@ -34,7 +34,7 @@ const operate = (a, b, op) => {
   }
 }
 
-let display = document.querySelector('#display');
+let display = document.querySelector('#text');
 let clearButton = document.querySelector('#clear');
 let numbers = document.querySelectorAll('.number');
 let operators = document.querySelectorAll('.operator');

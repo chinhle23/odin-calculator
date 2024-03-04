@@ -1,5 +1,6 @@
 * {
   padding: 0;
+  margin: 0;
 }
 
 body {
@@ -8,14 +9,20 @@ body {
 }
 
 .calculator {
+  margin-top: 100px;
   width: 320px;
+  border: solid;
   display: flex;
   flex-direction: column;
 }
 
 #display {
-  height: 30px;
-  border: solid;
+  display: flex;
+  justify-content: right;
+  padding: 8px;
+  border-bottom: solid;
+  align-items: end;
+  height: 60px;
 }
 
 .row {
