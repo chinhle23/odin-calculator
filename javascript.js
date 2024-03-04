@@ -6,6 +6,7 @@ const divide = (a, b) => +a / +b;
 let firstNum = '';
 let secondNum = '';
 let operator = '';
+let solution = '';
 
 const operate = (a, b, op) => {
   switch (op) {
@@ -31,7 +32,7 @@ numbers.forEach(number => {
       display.textContent = firstNum;
     } else {
       secondNum += number.value;
-      display.textContent = secondNum;
+      display.textContent = `${firstNum} ${operator} ${secondNum}`;
     }
   });
 });
@@ -40,7 +41,16 @@ let operators = document.querySelectorAll('.operator');
 
 operators.forEach(item => {
   item.addEventListener('click', () => {
-    operator = item.value;
-    display.textContent = operator;
+    if (firstNum !== '' && secondNum !== '' && operator !== '') {
+      solution = operate(+firstNum, +secondNum, operator);
+      firstNum = solution;
+      secondNum = '';
+      operator = item.value;
+    } else if (firstNum !== '') {
+      operator = item.value;
+    } else {
+      firstNum = '0';
+    }
+    display.textContent = `${firstNum} ${operator}`;
   });
 });
