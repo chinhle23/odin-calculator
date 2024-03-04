@@ -32,8 +32,10 @@ const operate = (a, b, op) => {
 let display = document.querySelector('#display');
 let clearButton = document.querySelector('#clear');
 let numbers = document.querySelectorAll('.number');
+let operators = document.querySelectorAll('.operator');
+let equalsButton = document.querySelector('#equals');
 
-clearButton.addEventListener('click', () => clear());
+clearButton.addEventListener('click', () => clear())
 
 numbers.forEach(number => {
   number.addEventListener('click', () => {
@@ -47,8 +49,6 @@ numbers.forEach(number => {
   });
 });
 
-let operators = document.querySelectorAll('.operator');
-
 operators.forEach(item => {
   item.addEventListener('click', () => {
     if (firstNum !== '' && secondNum !== '' && operator !== '') {
@@ -56,6 +56,7 @@ operators.forEach(item => {
       firstNum = solution;
       secondNum = '';
       operator = item.value;
+      solution = '';
     } else if (firstNum !== '') {
       operator = item.value;
     } else {
@@ -64,4 +65,17 @@ operators.forEach(item => {
     }
     display.textContent = `${firstNum} ${operator}`;
   });
+});
+
+equalsButton.addEventListener('click', () => {
+  if (firstNum !== '' && secondNum !== '' && operator !== '') {
+    solution = operate(+firstNum, +secondNum, operator);
+    display.textContent = `${firstNum} ${operator} ${secondNum} = ${solution}`;
+    firstNum = solution;
+    secondNum = '';
+    operator = '';
+    solution = '';
+  } else {
+    display.textContent = `${firstNum} ${operator}`;
+  }
 });
