@@ -1,0 +1,37 @@
+* {
+  padding: 0;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+}
+
+.calculator {
+  width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+#display {
+  height: 30px;
+  border: solid;
+}
+
+.row {
+  display: flex;
+}
+
+#clear, #zero {
+  width: 160px;
+  height: 60px;
+}
+.operator, .number, #decimal {
+  width: 80px;
+  height: 60px;
+}
+
+#equals {
+  width: 80px;
+  height: 120px;
+}
