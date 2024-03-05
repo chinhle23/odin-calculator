@@ -8,6 +8,7 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgb(207, 226, 255);
 }
 
 .calculator {
@@ -15,6 +16,7 @@ body {
   border: 4px solid;
   display: flex;
   flex-direction: column;
+  color: white;
 }
 
 #display {
@@ -24,6 +26,11 @@ body {
   border-bottom: solid;
   align-items: end;
   height: 60px;
+  background-color: black;
+}
+
+button {
+  color: white;
 }
 
 .row {
@@ -34,12 +41,26 @@ body {
   width: 160px;
   height: 60px;
 }
+
+#clear {
+  background-color: rgb(220, 53, 69);
+}
+
 .operator, .number, #decimal {
   width: 80px;
   height: 60px;
 }
 
+.number, #decimal {
+  background-color: rgb(33, 37, 41);
+}
+
+.operator {
+  background-color: rgb(108, 117, 125);
+}
+
 #equals {
   width: 80px;
   height: 120px;
+  background-color: rgb(0, 68, 102);
 }
