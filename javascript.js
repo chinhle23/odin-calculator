@@ -28,16 +28,39 @@ const operate = (a, b, op) => {
       return divide(a, b);
   }
 }
-const handleNumbers = (number) => {
+
+const handleNumbers = (clicked) => {
   if (display.textContent.includes('=')) {
-    firstNum = number;
+    firstNum = clicked;
     display.textContent = firstNum;
   } else if (operator === '') {
-    firstNum += number;
+    firstNum += clicked;
     display.textContent = firstNum;
   } else {
-    secondNum += number;
+    secondNum += clicked;
     display.textContent = `${firstNum} ${operator} ${secondNum}`;
+  }
+}
+
+const handleOperators = (clicked) => {
+  if (firstNum !== '' && secondNum !== '' && operator !== '') {
+    solution = operate(+firstNum, +secondNum, operator);
+    if (typeof solution === 'number') {
+      firstNum = solution;
+      operator = clicked;
+      display.textContent = `${firstNum} ${operator}`;
+    } else {
+      display.textContent = solution;
+      firstNum = '';
+    }
+    secondNum = '';
+  } else if (firstNum !== '') {
+    operator = clicked;
+    display.textContent = `${firstNum} ${operator}`;
+  } else {
+    firstNum = '0';
+    operator = clicked;
+    display.textContent = `${firstNum} ${operator}`;
   }
 }
 
@@ -57,28 +80,8 @@ numbers.forEach(number => {
   number.addEventListener('click', () => handleNumbers(number.value));
 });
 
-operators.forEach(item => {
-  item.addEventListener('click', () => {
-    if (firstNum !== '' && secondNum !== '' && operator !== '') {
-      solution = operate(+firstNum, +secondNum, operator);
-      if (typeof solution === 'number') {
-        firstNum = solution;
-        operator = item.value;
-        display.textContent = `${firstNum} ${operator}`;
-      } else {
-        display.textContent = solution;
-        firstNum = '';
-      }
-      secondNum = '';
-    } else if (firstNum !== '') {
-      operator = item.value;
-      display.textContent = `${firstNum} ${operator}`;
-    } else {
-      firstNum = '0';
-      operator = item.value;
-      display.textContent = `${firstNum} ${operator}`;
-    }
-  });
+operators.forEach(operator => {
+  operator.addEventListener('click', () => handleOperators(operator.value));
 });
 
 equalsButton.addEventListener('click', () => {
