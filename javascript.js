@@ -43,16 +43,16 @@ const handleNumbers = (clicked) => {
 }
 
 const handleDecimal = (clicked) => {
-  if (display.textContent.includes('=')) {
+  if (display.textContent.includes('=') || firstNum === '') {
     firstNum = `0${clicked}`;
     display.textContent = firstNum;
   } else if (operator === '' && !firstNum.includes('.')) {
     firstNum += clicked;
     display.textContent = firstNum;
-  } else if (secondNum === '') {
+  } else if (operator !== '' && secondNum === '') {
     secondNum = `0${clicked}`;
     display.textContent = `${firstNum} ${operator} ${secondNum}`;
-  } else if (!secondNum.includes('.')) {
+  } else if (operator !== '' && !secondNum.includes('.')) {
     secondNum += clicked;
     display.textContent = `${firstNum} ${operator} ${secondNum}`;
   }
@@ -60,9 +60,10 @@ const handleDecimal = (clicked) => {
 
 const handleOperators = (clicked) => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
-    solution = Math.round(1e12 * operate(+firstNum, +secondNum, operator)) / 1e12;
+    solution = operate(+firstNum, +secondNum, operator)
+    solutionRounded = Math.round(1e12 * solution) / 1e12;
     if (typeof solution === 'number') {
-      firstNum = solution;
+      firstNum = solutionRounded;
       operator = clicked;
       display.textContent = `${firstNum} ${operator}`;
     } else {
@@ -82,10 +83,11 @@ const handleOperators = (clicked) => {
 
 const handleEquals = () => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
-    solution = Math.round(1e12 * operate(+firstNum, +secondNum, operator)) / 1e12;
+    solution = operate(+firstNum, +secondNum, operator)
+    solutionRounded = Math.round(1e12 * solution) / 1e12;
     if (typeof solution === 'number') {
-      display.textContent = `${firstNum} ${operator} ${secondNum} = ${solution}`;
-      firstNum = solution;
+      display.textContent = `${firstNum} ${operator} ${secondNum} = ${solutionRounded}`;
+      firstNum = solutionRounded;
     } else {
       display.textContent = solution;
       firstNum = '';
@@ -115,6 +117,15 @@ const handleBackspace = () => {
   }
 }
 
+// const handleKeyPress = (e) => {
+//   console.log(e.key)
+//   if (/\d/.test(e.key)) {
+//     return handleNumbers(e.key);
+//   } else if (e.key === '.') {
+//     return handleDecimal(e.key);
+//   }
+// }
+
 let firstNum = '';
 let secondNum = '';
 let operator = '';
@@ -142,3 +153,5 @@ operators.forEach(operator => {
 equalsButton.addEventListener('click', () => handleEquals());
 
 backspaceButton.addEventListener('click', () => handleBackspace());
+
+// document.addEventListener('keydown', (e) => handleKeyPress(e));
