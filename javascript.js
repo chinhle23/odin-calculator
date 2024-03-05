@@ -64,27 +64,7 @@ const handleOperators = (clicked) => {
   }
 }
 
-let firstNum = '';
-let secondNum = '';
-let operator = '';
-let solution = '';
-let display = document.querySelector('#text');
-let clearButton = document.querySelector('#clear');
-let numbers = document.querySelectorAll('.number');
-let operators = document.querySelectorAll('.operator');
-let equalsButton = document.querySelector('#equals');
-
-clearButton.addEventListener('click', () => clear())
-
-numbers.forEach(number => {
-  number.addEventListener('click', () => handleNumbers(number.value));
-});
-
-operators.forEach(operator => {
-  operator.addEventListener('click', () => handleOperators(operator.value));
-});
-
-equalsButton.addEventListener('click', () => {
+const handleEquals = () => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
     solution = operate(+firstNum, +secondNum, operator);
     if (typeof solution === 'number') {
@@ -99,4 +79,26 @@ equalsButton.addEventListener('click', () => {
   } else {
     display.textContent = `${firstNum} ${operator}`;
   }
+}
+
+let firstNum = '';
+let secondNum = '';
+let operator = '';
+let solution = '';
+let display = document.querySelector('#text');
+let clearButton = document.querySelector('#clear');
+let numbers = document.querySelectorAll('.number');
+let operators = document.querySelectorAll('.operator');
+let equalsButton = document.querySelector('#equals');
+
+clearButton.addEventListener('click', () => clear());
+
+numbers.forEach(number => {
+  number.addEventListener('click', () => handleNumbers(number.value));
 });
+
+operators.forEach(operator => {
+  operator.addEventListener('click', () => handleOperators(operator.value));
+});
+
+equalsButton.addEventListener('click', () => handleEquals());
