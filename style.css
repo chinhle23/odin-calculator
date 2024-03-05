@@ -37,7 +37,7 @@ button {
   display: flex;
 }
 
-#clear, #zero {
+#zero {
   width: 160px;
   height: 60px;
 }
@@ -46,7 +46,7 @@ button {
   background-color: rgb(220, 53, 69);
 }
 
-.operator, .number, #decimal {
+.operator, .number, #decimal, #backspace, #clear {
   width: 80px;
   height: 60px;
 }
@@ -66,7 +66,5 @@ button {
 }
 
 #backspace {
-  width: 320px;
-  height: 30px;
   background-color: orange;
 }
