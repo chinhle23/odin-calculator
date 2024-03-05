@@ -97,6 +97,24 @@ const handleEquals = () => {
   }
 }
 
+const handleBackspace = () => {
+  if (display.textContent.includes('=')) {
+    return clear();
+  } else if (operator === '') {
+    firstNum = firstNum.slice(0, firstNum.length - 1);
+    if (isNaN(+firstNum)) { 
+      firstNum = ''; 
+    }
+    display.textContent = firstNum;
+  } else {
+    secondNum = secondNum.slice(0, secondNum.length - 1);
+    if (isNaN(+secondNum)) { 
+      secondNum = ''; 
+    }
+    display.textContent = `${firstNum} ${operator} ${secondNum}`;
+  }
+}
+
 let firstNum = '';
 let secondNum = '';
 let operator = '';
@@ -107,6 +125,7 @@ let numbers = document.querySelectorAll('.number');
 let decimalButton = document.querySelector('#decimal');
 let operators = document.querySelectorAll('.operator');
 let equalsButton = document.querySelector('#equals');
+let backspaceButton = document.querySelector('#backspace');
 
 clearButton.addEventListener('click', () => clear());
 
@@ -121,3 +140,5 @@ operators.forEach(operator => {
 });
 
 equalsButton.addEventListener('click', () => handleEquals());
+
+backspaceButton.addEventListener('click', () => handleBackspace());
