@@ -42,6 +42,22 @@ const handleNumbers = (clicked) => {
   }
 }
 
+const handleDecimal = (clicked) => {
+  if (display.textContent.includes('=')) {
+    firstNum = `0${clicked}`;
+    display.textContent = firstNum;
+  } else if (operator === '' && !firstNum.includes('.')) {
+    firstNum += clicked;
+    display.textContent = firstNum;
+  } else if (secondNum === '') {
+    secondNum = `0${clicked}`;
+    display.textContent = `${firstNum} ${operator} ${secondNum}`;
+  } else if (!secondNum.includes('.')) {
+    secondNum += clicked;
+    display.textContent = `${firstNum} ${operator} ${secondNum}`;
+  }
+}
+
 const handleOperators = (clicked) => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
     solution = operate(+firstNum, +secondNum, operator);
@@ -88,6 +104,7 @@ let solution = '';
 let display = document.querySelector('#text');
 let clearButton = document.querySelector('#clear');
 let numbers = document.querySelectorAll('.number');
+let decimalButton = document.querySelector('#decimal');
 let operators = document.querySelectorAll('.operator');
 let equalsButton = document.querySelector('#equals');
 
@@ -96,6 +113,8 @@ clearButton.addEventListener('click', () => clear());
 numbers.forEach(number => {
   number.addEventListener('click', () => handleNumbers(number.value));
 });
+
+decimalButton.addEventListener('click', (e) => handleDecimal(e.target.value));
 
 operators.forEach(operator => {
   operator.addEventListener('click', () => handleOperators(operator.value));
