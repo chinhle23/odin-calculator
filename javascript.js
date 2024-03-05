@@ -117,14 +117,21 @@ const handleBackspace = () => {
   }
 }
 
-// const handleKeyPress = (e) => {
-//   console.log(e.key)
-//   if (/\d/.test(e.key)) {
-//     return handleNumbers(e.key);
-//   } else if (e.key === '.') {
-//     return handleDecimal(e.key);
-//   }
-// }
+const handleKeyPress = (e) => {
+  if (/\d/.test(e.key)) {
+    return handleNumbers(e.key);
+  } else if (e.key === '.') {
+    return handleDecimal(e.key);
+  } else if (/[*/+-]/.test(e.key)) {
+    return handleOperators(e.key);
+  } else if (e.key === '=' || e.key === 'Enter') {
+    return handleEquals(e.key);
+  } else if (e.key === 'Backspace') {
+    return handleBackspace(e.key);
+  } else if (e.key === 'Clear') {
+    return clear();
+  }
+}
 
 let firstNum = '';
 let secondNum = '';
@@ -154,4 +161,4 @@ equalsButton.addEventListener('click', () => handleEquals());
 
 backspaceButton.addEventListener('click', () => handleBackspace());
 
-// document.addEventListener('keydown', (e) => handleKeyPress(e));
+document.addEventListener('keydown', (e) => handleKeyPress(e));
