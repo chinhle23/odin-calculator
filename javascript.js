@@ -60,7 +60,7 @@ const handleDecimal = (clicked) => {
 
 const handleOperators = (clicked) => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
-    solution = operate(+firstNum, +secondNum, operator);
+    solution = Math.round(1e12 * operate(+firstNum, +secondNum, operator)) / 1e12;
     if (typeof solution === 'number') {
       firstNum = solution;
       operator = clicked;
@@ -82,7 +82,7 @@ const handleOperators = (clicked) => {
 
 const handleEquals = () => {
   if (firstNum !== '' && secondNum !== '' && operator !== '') {
-    solution = operate(+firstNum, +secondNum, operator);
+    solution = Math.round(1e12 * operate(+firstNum, +secondNum, operator)) / 1e12;
     if (typeof solution === 'number') {
       display.textContent = `${firstNum} ${operator} ${secondNum} = ${solution}`;
       firstNum = solution;
