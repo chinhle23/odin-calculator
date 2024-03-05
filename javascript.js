@@ -11,11 +11,6 @@ const clear = () => {
   display.textContent = '';
 }
 
-let firstNum = '';
-let secondNum = '';
-let operator = '';
-let solution = '';
-
 const operate = (a, b, op) => {
   if (b === 0 && op === '/') {
     secondNum = '';
@@ -33,7 +28,23 @@ const operate = (a, b, op) => {
       return divide(a, b);
   }
 }
+const handleNumbers = (number) => {
+  if (display.textContent.includes('=')) {
+    firstNum = number;
+    display.textContent = firstNum;
+  } else if (operator === '') {
+    firstNum += number;
+    display.textContent = firstNum;
+  } else {
+    secondNum += number;
+    display.textContent = `${firstNum} ${operator} ${secondNum}`;
+  }
+}
 
+let firstNum = '';
+let secondNum = '';
+let operator = '';
+let solution = '';
 let display = document.querySelector('#text');
 let clearButton = document.querySelector('#clear');
 let numbers = document.querySelectorAll('.number');
@@ -43,15 +54,7 @@ let equalsButton = document.querySelector('#equals');
 clearButton.addEventListener('click', () => clear())
 
 numbers.forEach(number => {
-  number.addEventListener('click', () => {
-    if (operator === '') {
-      firstNum += number.value;
-      display.textContent = firstNum;
-    } else {
-      secondNum += number.value;
-      display.textContent = `${firstNum} ${operator} ${secondNum}`;
-    }
-  });
+  number.addEventListener('click', () => handleNumbers(number.value));
 });
 
 operators.forEach(item => {
